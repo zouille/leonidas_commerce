@@ -140,6 +140,27 @@ function basic_preprocess_node(&$vars) {
   if (!empty($node->classes_array)) {
     $vars['classes_array'] = array_merge($vars['classes_array'], $node->classes_array);
   }
+  
+  switch($vars['type']) {
+  
+  	case 'chocolat':
+  		$vars['prix_entreprise'] = $vars['elements']['product:field_prix_entreprise'][0]['#markup'];
+  		$vars['description'] = $vars['elements']['product:field_description'][0]['#markup'];
+  		$vars['poids'] = $vars['elements']['product:field_poids']['#items'][0]['value'];
+  		$vars['type'] = $vars['elements']['product:field_type']['#items'][0]['value'];
+  		$vars['chocolat'] = $vars['elements']['product:field_chocolat']['#items'][0]['value'];
+  		$vars['garniture'] = $vars['elements']['product:field_garniture']['#items'][0]['value'];
+   		$vars['prix_particulier'] = intval($vars['elements']['product:commerce_price']['#items'][0]['amount']) / 100;
+   		$vars['image'] = file_create_url($vars['content']['product:field_photo'][0]['#item']['uri']);
+   		$vars['titre'] = $vars['content']['title_field']['#items'][0]['value'];
+  		break;
+  	default:	
+  }
+  
+}
+
+function basic_preprocess_node__chocolat(&$vars){
+	die();
 }
 
 function basic_preprocess_block(&$vars, $hook) {
