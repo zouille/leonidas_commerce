@@ -151,17 +151,55 @@ function basic_preprocess_node(&$vars) {
   		$vars['chocolat'] = $vars['elements']['product:field_chocolat']['#items'][0]['value'];
   		$vars['garniture'] = $vars['elements']['product:field_garniture']['#items'][0]['value'];
    		$vars['prix_particulier'] = intval($vars['elements']['product:commerce_price']['#items'][0]['amount']) / 100;
+   		$vars['prix_entreprise'] = intval($vars['content']['product:field_prix_entreprise']['#items'][0]['amount']) / 100;
    		$vars['image'] = file_create_url($vars['content']['product:field_photo'][0]['#item']['uri']);
    		$vars['titre'] = $vars['content']['title_field']['#items'][0]['value'];
   		break;
+  	
+  	case 'coffret':
+  		$vars['titre'] = $vars['title_field'][0]['value'];
+  		$vars['prix_particulier'] = intval($vars['content']['product:commerce_price']['#items'][0]['amount'] ) / 100;
+  		$vars['prix_entreprise'] = intval($vars['content']['product:field_prix_entreprise']['#items'][0]['amount']) / 100;
+  		$vars['poids'] = $vars['content']['product:field_poids']['#items'][0]['value'];
+  		$vars['image'] = file_create_url($vars['content']['product:field_photo'][0]['#item']['uri']);
+  		$vars['description'] = $vars['elements']['product:field_description'][0]['#markup'];
+  		break;
+  	
+  	case 'ballotin':
+  		$vars['titre'] = $vars['title_field'][0]['value'];
+  		$vars['prix_particulier'] = intval($vars['content']['product:commerce_price']['#items'][0]['amount'] ) / 100;
+  		$vars['prix_entreprise'] = intval($vars['content']['product:field_prix_entreprise']['#items'][0]['amount']) / 100;
+  		$vars['poids'] = $vars['content']['product:field_poids']['#items'][0]['value'];
+  		$vars['description'] = $vars['elements']['product:field_description'][0]['#markup'];
+  		$vars['photo'] = file_create_url($vars['content']['product:field_photo'][0]['#item']['uri']);
+  		break;
+
+  	case 'the' :
+  		$vars['titre'] = $vars['content']['title_field']['#items'][0]['value'];
+  		$vars['description'] = $vars['content']['product:field_description']['#items'][0]['value']; 
+  		$vars['prix_particulier'] = intval($vars['content']['product:commerce_price']['#items'][0]['amount'] ) / 100;
+  		$vars['prix_entreprise'] = intval($vars['content']['product:field_prix_entreprise']['#items'][0]['amount']) / 100;
+  		$vars['poids'] = $vars['content']['product:field_poids']['#items'][0]['value'];
+  		$vars['photo'] = file_create_url($vars['content']['product:field_photo'][0]['#item']['uri']);
+  		$vars['couleur'] = $vars['content']['product:field_couleur'][0]['#markup'];
+  		break;
+  	
+  	case 'draguees' : 
+  		dpm($vars);
+  		$vars['titre'] = $vars['content']['title_field']['#items'][0]['value'];
+  		$vars['description'] = $vars['content']['product:field_description']['#items'][0]['value'];
+  		$vars['prix_particulier'] = intval($vars['content']['product:commerce_price']['#items'][0]['amount'] ) / 100;
+  		$vars['prix_entreprise'] = intval($vars['content']['product:field_prix_entreprise']['#items'][0]['amount']) / 100;
+  		$vars['poids'] = $vars['content']['product:field_poids']['#items'][0]['value'];
+  		$vars['photo'] = file_create_url($vars['content']['product:field_photo'][0]['#item']['uri']);
+  		break;
+  		
   	default:	
+  		break;	
   }
   
 }
 
-function basic_preprocess_node__chocolat(&$vars){
-	die();
-}
 
 function basic_preprocess_block(&$vars, $hook) {
   // Add a striping class.
